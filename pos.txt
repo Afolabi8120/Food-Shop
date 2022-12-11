@@ -1,0 +1,332 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jul 28, 2022 at 10:19 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.3.26
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+CREATE DATABASE pos;
+USE pos;
+--
+-- Database: `pos`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblcategory`
+--
+
+CREATE TABLE `tblcategory` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `date_added` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblcategory`
+--
+
+INSERT INTO `tblcategory` (`id`, `name`, `date_added`) VALUES
+(1, 'Beverages', '2022-07-23 16:39:47'),
+(2, 'Cereal', '2022-07-23 16:39:47'),
+(3, 'Local Dish', '2022-07-23 16:39:47'),
+(4, 'Coffee', '2022-07-23 16:39:47'),
+(5, 'Foreign Dish', '2022-07-23 16:39:47'),
+(6, 'BBQ', '2022-07-23 16:39:47'),
+(7, 'Others', '2022-07-23 16:39:47');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblmenu`
+--
+
+CREATE TABLE `tblmenu` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `price` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `plate` int(11) NOT NULL,
+  `picture` varchar(255) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `description` text NOT NULL,
+  `date_added` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblmenu`
+--
+
+INSERT INTO `tblmenu` (`id`, `name`, `price`, `category_id`, `plate`, `picture`, `status`, `description`, `date_added`) VALUES
+(1, 'Fried Rice', 1500, 5, 20, '0ee2405d162c60e415bfba56a24aca8c.jpg', 'Available', 'This fried rice comes with a beef, one egg, one chicken hip and one cold drink', '22 Jul, 2022 12:46 PM'),
+(2, 'Goat Meat Pepper Soup', 1000, 3, 24, 's-img-6.jpg', 'Available', 'Pepper soup made with goat soup', '22 Jul, 2022 12:47 PM'),
+(3, 'Home Made Apple Juice', 500, 7, 46, 's-img-4.jpg', 'Available', 'A home made juice made from apple', '22 Jul, 2022 2:51 PM'),
+(4, 'Sharwama', 1300, 7, 35, 'g-3.jpg', 'Available', 'This sharwama is made up of 2 hot dogs and beef', '22 Jul, 2022 5:44 PM'),
+(5, 'Ewa Aganyin', 800, 7, 30, '55db8a56dbe021959d1de102addc6b39.jpg', 'Available', 'Ewa aganyi made with dried beans', '25 Jul, 2022 7:12 PM'),
+(6, 'Pizza small', 1900, 7, 19, '9ed5c4756f56317810d7e364ca7f1634.jpg', 'Available', 'A pizza that decidedly staggers under an overload of golden corn, exotic black olives, crunchy onions', '25 Jul, 2022 7:14 PM'),
+(7, 'Pancake', 1200, 7, 32, '91cb0e9b62a67ffe1bfe0734b84ccf00.jpg', 'Available', 'Pancake sprinkled with onions', '25 Jul, 2022 7:39 PM'),
+(8, 'Tuwo', 400, 7, 40, 'idly.jpg', 'Available', 'Tuwo is a type of savoury rice cake, originating from the hausa land and served with groundnut soup and goat meat.', '25 Jul, 2022 7:41 PM'),
+(9, 'Spaghetti', 400, 7, 30, '927f5a1c2bcfff25ff8a936fa98d5f2f.jpg', 'Available', 'just a sample spag', '25 Jul, 2022 8:04 PM');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblorder`
+--
+
+CREATE TABLE `tblorder` (
+  `id` bigint(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `food_id` int(11) NOT NULL,
+  `qty` int(4) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  `order_number` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblorder`
+--
+
+INSERT INTO `tblorder` (`id`, `user_id`, `food_id`, `qty`, `price`, `total`, `order_number`) VALUES
+(31, 2, 1, 1, '1500.00', '1500.00', 'ORD-07252s8am49i'),
+(32, 2, 2, 2, '1000.00', '2000.00', 'ORD-07252s8am49i'),
+(33, 2, 4, 2, '1300.00', '2600.00', 'ORD-072533l1kx0a'),
+(34, 2, 3, 1, '500.00', '500.00', 'ORD-072533l1kx0a'),
+(39, 2, 4, 1, '1300.00', '1300.00', 'ORD-0725d8hu748n'),
+(40, 2, 2, 1, '1000.00', '1000.00', 'ORD-0725d8hu748n'),
+(41, 2, 1, 1, '1500.00', '1500.00', 'ORD-0725d8hu748n'),
+(42, 2, 3, 1, '500.00', '500.00', 'ORD-0725d8hu748n'),
+(47, 8, 2, 2, '1000.00', '2000.00', 'ORD-072522v0dbt2'),
+(48, 8, 3, 3, '500.00', '1500.00', 'ORD-072522v0dbt2'),
+(49, 8, 7, 2, '1200.00', '2400.00', 'ORD-072522v0dbt2'),
+(50, 8, 1, 1, '1500.00', '1500.00', 'ORD-072522v0dbt2'),
+(51, 8, 4, 1, '1300.00', '1300.00', 'ORD-0725d9757xvo'),
+(53, 8, 1, 1, '1500.00', '1500.00', ''),
+(55, 8, 2, 2, '1000.00', '2000.00', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblorderaddress`
+--
+
+CREATE TABLE `tblorderaddress` (
+  `id` bigint(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `order_id` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `address` text NOT NULL,
+  `order_total` decimal(10,2) NOT NULL,
+  `order_date` varchar(50) NOT NULL,
+  `status` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblorderaddress`
+--
+
+INSERT INTO `tblorderaddress` (`id`, `user_id`, `order_id`, `name`, `email`, `phone`, `address`, `order_total`, `order_date`, `status`) VALUES
+(1, 2, 'ORD-07252s8am49i', 'Ademola Omolola Tolulope', 'deb@gmail.com', '08090949669', 'Lagos State', '3500.00', '25 Jul, 2022 12:12 PM', 'Food Delivered'),
+(2, 2, 'ORD-072533l1kx0a', 'Temitope', 'tpex@gmail.com', '08090949669', 'Orisun Hall of Residence, Room No B10, Blk B', '3100.00', '25 Jul, 2022 12:23 PM', 'Order Cancel'),
+(3, 2, 'ORD-0725d8hu748n', 'Ademola Omolola Tolulope', 'deb@gmail.com', '08090949669', 'Lagos State', '4300.00', '25 Jul, 2022 3:30 PM', 'Food Delivered'),
+(5, 8, 'ORD-072522v0dbt2', 'Afolabi Emmanuel', 'tpex@gmail.com', '08090949669', 'Orisun Hall of residence, BLK B, Room No B10', '5900.00', '25 Jul, 2022 8:06 PM', 'Food Delivered'),
+(6, 8, 'ORD-0725d9757xvo', 'Sample Name', 'sample@gmail.com', '08090949669', 'Iyana Iyesi, Ogun State', '1300.00', '25 Jul, 2022 8:09 PM', 'Order Cancel');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblstorename`
+--
+
+CREATE TABLE `tblstorename` (
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `picture` varchar(255) NOT NULL,
+  `address` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblstorename`
+--
+
+INSERT INTO `tblstorename` (`name`, `email`, `phone`, `picture`, `address`) VALUES
+('Temi Foods', 'afolabi8120@gmail.com', '08090949669', 'image_543244b6-ebe6-4365-a901-c907417e3fe920201216_031932.jpg', 'Lagos State');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbltrackfood`
+--
+
+CREATE TABLE `tbltrackfood` (
+  `id` bigint(20) NOT NULL,
+  `order_id` varchar(50) NOT NULL,
+  `remark` text NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `date` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbltrackfood`
+--
+
+INSERT INTO `tbltrackfood` (`id`, `order_id`, `remark`, `status`, `date`) VALUES
+(1, 'ORD-07252s8am49i', 'Your order has been confirmed', 'Order Confirm', '25 Jul, 2022 4:45 PM'),
+(2, 'ORD-07252s8am49i', 'Your food is being prepared', 'Food being Prepared', '25 Jul, 2022 4:59 PM'),
+(3, 'ORD-07252s8am49i', 'Your food has been picked up by the dispatch rider', 'Food Picked Up', '25 Jul, 2022 5:09 PM'),
+(4, 'ORD-07252s8am49i', 'Delivered', 'Food Delivered', '25 Jul, 2022 5:16 PM'),
+(5, 'ORD-072533l1kx0a', 'Order has been confirmed', 'Order Confirm', '25 Jul, 2022 5:53 PM'),
+(6, 'ORD-072533l1kx0a', 'We ran out of Sharwama sauce, so we had to cancel the order. Sorry for the inconvenience caused.', 'Order Cancel', '25 Jul, 2022 6:06 PM'),
+(7, 'ORD-0725d8hu748n', 'Your order has been confirmed', 'Order Confirm', '25 Jul, 2022 6:25 PM'),
+(8, 'ORD-0725d8hu748n', 'Your food is being prepared', 'Food being Prepared', '25 Jul, 2022 6:31 PM'),
+(9, 'ORD-0725d8hu748n', 'Your food has been picked up by the dispatch rider', 'Food Picked Up', '25 Jul, 2022 6:31 PM'),
+(10, 'ORD-0725d8hu748n', 'Food Delivered', 'Food Delivered', '25 Jul, 2022 6:31 PM'),
+(11, 'ORD-0725wih48u67', 'Your order has been confirmed', 'Order Confirm', '25 Jul, 2022 7:44 PM'),
+(12, 'ORD-0725wih48u67', 'Your food is being prepared', 'Food being Prepared', '25 Jul, 2022 7:45 PM'),
+(13, 'ORD-0725wih48u67', 'Your food has been picked up by the dispatch rider ', 'Food Picked Up', '25 Jul, 2022 7:46 PM'),
+(14, 'ORD-0725wih48u67', 'Delivered', 'Food Delivered', '25 Jul, 2022 7:47 PM'),
+(15, 'ORD-072522v0dbt2', 'Your order has been confirmed', 'Order Confirm', '25 Jul, 2022 8:07 PM'),
+(16, 'ORD-072522v0dbt2', 'Your food is being prepared', 'Food being Prepared', '25 Jul, 2022 8:07 PM'),
+(17, 'ORD-072522v0dbt2', 'Your food has been picked up by the dispatch rider', 'Food Picked Up', '25 Jul, 2022 8:08 PM'),
+(18, 'ORD-072522v0dbt2', 'Delivered', 'Food Delivered', '25 Jul, 2022 8:08 PM'),
+(19, 'ORD-0725d9757xvo', 'We ran out of sharwama sauce, sorry for the incinvenience caused', 'Order Cancel', '25 Jul, 2022 8:10 PM');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbluser`
+--
+
+CREATE TABLE `tbluser` (
+  `id` bigint(20) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `surname` varchar(100) NOT NULL,
+  `othername` varchar(100) NOT NULL,
+  `gender` varchar(15) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `picture` varchar(255) NOT NULL,
+  `address` text NOT NULL,
+  `usertype` varchar(50) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `session` varchar(50) NOT NULL,
+  `reg_date` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbluser`
+--
+
+INSERT INTO `tbluser` (`id`, `username`, `surname`, `othername`, `gender`, `password`, `email`, `phone`, `picture`, `address`, `usertype`, `status`, `session`, `reg_date`) VALUES
+(1, 'Afolabi', 'Afolabi', 'Temidayo Timothy', 'Male', '$2y$10$w/Hz1IMksaCRuvL8sQ5RaeezpQ5eiWgdnO6GnTGxnEwvvC4/L.aFa', 'afolabi8120@gmail.com', '08090949669', '1557574630569.jpg', 'Ore, Ondo State', 'Super Admin', 'Active', 'n4k2bis4qh4sal4imasf9a5ore', '22 Jul, 2022 1:46 PM'),
+(2, 'Deb', 'Ademola', 'Omolola Tolulope', 'Female', '$2y$10$l.nH0Wx70Y2IFjO84JNkV.uOKIuWi4P28o3swltBbLMf5qRBBXsqm', 'deb@gmail.com', '08090949669', '1548329864658.jpg', 'Lagos State', 'User', 'Active', 'n4k2bis4qh4sal4imasf9a5ore', '22 Jul, 2022 1:49 PM'),
+(3, 'Albert', 'Albert', 'Faith Segun', 'Male', '$2y$10$hhYLe2tP9N1bT8VxhzzRsesHsBiNWOQSHhrJPzipJaGzwXCue4dCi', 'albert@gmail.com', '08090949669', '1540547953039.jpg', 'Ikotun, Lagos State', 'Admin', 'Active', 'gasf74im9hllfssned0s01mre6', '22 Jul, 2022 4:06 PM'),
+(8, 'Tpex', 'Afolabi', 'Emmanuel', 'Male', '$2y$10$rmFj3pUGwk0Sr7CkUiyAxO.wjWgvwcui8hTIMVIo3vBzbHkOaegie', 'tpex@gmail.com', '08090949669', '1545998011876.jpg', 'Orisun Hall of residence, BLK B, Room No B10', 'User', 'Active', 'h7pan88uvnjqv7i0ucmreu2nkj', '25 Jul, 2022 8:03 PM');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tblcategory`
+--
+ALTER TABLE `tblcategory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblmenu`
+--
+ALTER TABLE `tblmenu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblorder`
+--
+ALTER TABLE `tblorder`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblorderaddress`
+--
+ALTER TABLE `tblorderaddress`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblstorename`
+--
+ALTER TABLE `tblstorename`
+  ADD PRIMARY KEY (`name`);
+
+--
+-- Indexes for table `tbltrackfood`
+--
+ALTER TABLE `tbltrackfood`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbluser`
+--
+ALTER TABLE `tbluser`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tblcategory`
+--
+ALTER TABLE `tblcategory`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tblmenu`
+--
+ALTER TABLE `tblmenu`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `tblorder`
+--
+ALTER TABLE `tblorder`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+
+--
+-- AUTO_INCREMENT for table `tblorderaddress`
+--
+ALTER TABLE `tblorderaddress`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbltrackfood`
+--
+ALTER TABLE `tbltrackfood`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `tbluser`
+--
+ALTER TABLE `tbluser`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
